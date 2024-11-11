@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -34,19 +34,20 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-exec --no-startup-id xinput set-prop 12 "libinput Tapping Enabled" 1
-exec --no-startup-id xinput set-prop 12 "libinput Natural Scrolling Enabled" 1
-exec --no-startup-id fcitx5
-exec --no-startup-id picom
-exec --no-startup-id feh --bg-fill ~/tower-nord.png
-
-
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+
+exec --no-startup-id xinput set-prop 12 "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop 12 "libinput Natural Scrolling Enabled" 1
+exec --no-startup-id fcitx5
+exec --no-startup-id picom
+exec --no-startup-id /home/pink/wall.sh
+exec --no-startup-id polybar
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -58,11 +59,20 @@ tiling_drag modifier titlebar
 # start a terminal
 bindsym $mod+Return exec terminator
 
-#firefox
+# start a firefox 
 bindsym $mod+b exec firefox
+
+# start a tor
+bindsym $mod+t exec /home/pink/tor-browser/Browser/start-tor-browser
 
 # kill focused window
 bindsym $mod+Shift+q kill
+
+# 明るさを下げる
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+# 明るさを上げる
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
@@ -195,6 +205,13 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-}
+
+#bar {
+#        status_command i3status
+#}
+
+default_border pixel 1
+default_floating_border pixel 1
+
+gaps inner 10
+#gaps outer 5
