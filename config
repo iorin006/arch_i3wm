@@ -46,7 +46,7 @@ exec --no-startup-id xinput set-prop 12 "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop 12 "libinput Natural Scrolling Enabled" 1
 exec --no-startup-id fcitx5
 exec --no-startup-id picom
-exec --no-startup-id /home/pink/wall.sh
+exec --no-startup-id feh --bg-fill ~/wall.png
 exec --no-startup-id polybar
 
 # Use Mouse+$mod to drag floating windows to their wanted position
